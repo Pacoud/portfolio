@@ -175,7 +175,7 @@
     .feature-block.reverse > * { direction: ltr; }
     .feature-text h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; letter-spacing: -.02em; margin-bottom: 16px; }
     .feature-text p { color: var(--text-secondary); font-size: 1rem; margin-bottom: 20px; line-height: 1.7; }
-    .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .feature-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; justify-content: center; }
     .feature-tag {
       background: rgba(76,175,80,.1); border: 1px solid rgba(76,175,80,.25);
       color: var(--green-accent); border-radius: 999px;
@@ -190,6 +190,10 @@
       max-width: 240px; margin: 0 auto; width: 100%;
     }
     .feature-img-wrap:hover { transform: scale(1.02); }
+    .feature-dual-imgs {
+      display: flex; gap: 16px; align-items: flex-start; justify-content: center;
+    }
+    .feature-dual-imgs .feature-img-wrap { flex: 1; max-width: 180px; }
     .feature-img-wrap img { width: 100%; display: block; }
 
     /* AI SECTION */
@@ -235,6 +239,7 @@
     /* SCREENSHOTS */
     .screenshots-grid {
       display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;
+      max-width: 520px; margin: 0 auto;
     }
     .screenshot-card {
       background: var(--bg-card); border: 1px solid var(--border);
@@ -366,7 +371,7 @@
       <span class="hero-tag">Spring Boot</span>
       <span class="hero-tag">Gemini 2.5 Flash-Lite</span>
       <span class="hero-tag">CIQUAL</span>
-      <span class="hero-tag">JSON structuré</span>
+      <span class="hero-tag">Structuration JSON</span>
       <span class="hero-tag">Santé &amp; Nutrition</span>
     </div>
   </div>
@@ -418,6 +423,39 @@
   <h2 class="section-title fade-in">Ce que fait l'application</h2>
   <p class="section-desc">Deux modes de création, un suivi nutritionnel complet et une expérience utilisateur soignée.</p>
 
+  <!-- Feature Profil -->
+  <div class="feature-block reverse fade-in">
+    <div class="feature-text">
+      <h2>Un profil personnel complet</h2>
+      <p>
+        Chaque utilisateur dispose d'un profil centralisant ses informations personnelles
+        (âge, poids, taille, objectif nutritionnel), ses publications aimées,
+        ses abonnements et ses abonnés.
+      </p>
+      <p>
+        Ces informations sont modifiables à tout moment et influencent directement
+        les calculs d'équilibre nutritionnel : les calories cibles sont recalculées,
+        et les allergènes ou régimes spécifiques déclarés filtrent automatiquement
+        les ingrédients proposés.
+      </p>
+      <div class="feature-tags">
+        <span class="feature-tag">Profil utilisateur</span>
+        <span class="feature-tag">Publications aimées</span>
+        <span class="feature-tag">Abonnements</span>
+        <span class="feature-tag">Calcul nutritionnel</span>
+        <span class="feature-tag">Allergènes</span>
+      </div>
+    </div>
+    <div class="feature-dual-imgs">
+      <div class="feature-img-wrap">
+        <img src="images/profil.jpg" alt="Écran profil Health.ly — publications aimées, abonnements, infos personnelles" />
+      </div>
+      <div class="feature-img-wrap">
+        <img src="images/profil_modif.jpg" alt="Écran modification du profil Health.ly — mise à jour des infos et recalcul nutritionnel" />
+      </div>
+    </div>
+  </div>
+
   <!-- Feature 1 -->
   <div class="feature-block fade-in">
     <div class="feature-text">
@@ -425,7 +463,8 @@
       <p>
         L'écran de création manuelle offre un formulaire guidé : titre, description, catégorie de repas,
         niveau de difficulté, temps de préparation via un slider, et une sélection de tags colorés
-        (Vegan, Sans gluten, Rapide, Healthy, Étudiant…).
+        (Vegan, Sans gluten, Rapide, Healthy, Étudiant…). Les allergies sont gérées en amont, les ingrédients
+        déclarés comme allergènes à l'inscription sont barrés de la recherche.
       </p>
       <p>
         Les ingrédients et les étapes de préparation sont ajoutés dynamiquement,
@@ -621,16 +660,17 @@
       <div class="tech-icon">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"/></svg>
       </div>
+      <div style="text-align: center;">
       <h4>JSON structuré</h4>
       <p>Réponses typées et validées depuis l'API Gemini</p>
+      </div>
     </div>
-  </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Health.ly</div>
-  <p>Application mobile de santé &amp; nutrition · Propulsée par Gemini 2.5 Flash-Lite</p>
+  <p>Application mobile de santé &amp; nutrition </p>
   <p style="margin-top:8px;font-size:.78rem;opacity:.5;">Projet portfolio — Lucas</p>
 </footer>
 
