@@ -66,6 +66,17 @@
       background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(76,175,80,.18) 0%, transparent 70%);
       pointer-events: none;
     }
+    .hero-mockup {
+      position: absolute;
+      right: -2%; top: 30%;
+      transform: translateY(-50%) rotate(10deg);
+      max-width: 560px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+    }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
       background: rgba(76,175,80,.12); border: 1px solid rgba(76,175,80,.3);
@@ -75,6 +86,22 @@
     }
     .hero-badge span { width: 7px; height: 7px; border-radius: 50%; background: var(--green-accent); animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.3)} }
+
+    /* FADE-IN ANIMATIONS */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .8s ease-out, transform .8s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-delay-1 { transition-delay: .1s; }
+    .fade-in-delay-2 { transition-delay: .2s; }
+    .fade-in-delay-3 { transition-delay: .3s; }
+    .fade-in-delay-4 { transition-delay: .4s; }
+    .fade-in-delay-5 { transition-delay: .5s; }
 
     .hero h1 {
       font-size: clamp(3rem, 8vw, 6rem);
@@ -160,6 +187,7 @@
       border: 1px solid var(--border);
       box-shadow: 0 24px 64px rgba(0,0,0,.5);
       transition: transform .3s;
+      max-width: 240px; margin: 0 auto; width: 100%;
     }
     .feature-img-wrap:hover { transform: scale(1.02); }
     .feature-img-wrap img { width: 100%; display: block; }
@@ -169,8 +197,8 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 24px;
-      padding: 64px;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+      padding: 48px;
+      display: grid; grid-template-columns: 1fr 1.8fr; gap: 40px; align-items: center;
       position: relative; overflow: hidden;
     }
     .ai-section::before {
@@ -206,12 +234,13 @@
 
     /* SCREENSHOTS */
     .screenshots-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;
     }
     .screenshot-card {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: 20px; overflow: hidden;
       transition: transform .3s, box-shadow .3s;
+      max-width: 240px; margin: 0 auto; width: 100%;
     }
     .screenshot-card:hover { transform: translateY(-8px); box-shadow: 0 24px 56px rgba(0,0,0,.6); }
     .screenshot-card img { width: 100%; display: block; }
@@ -291,18 +320,15 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
+      .hero-mockup { display: none; }
       nav { padding: 16px 24px; }
       .nav-links { display: none; }
       section { padding: 60px 24px; }
       .feature-block { grid-template-columns: 1fr; gap: 32px; }
       .feature-block.reverse { direction: ltr; }
       .ai-section { grid-template-columns: 1fr; padding: 32px; }
-      .screenshots-grid { grid-template-columns: 1fr 1fr; }
       .hero { padding: 100px 24px 60px; }
       .demo-block { grid-template-columns: 1fr; gap: 36px; }
-    }
-    @media (max-width: 560px) {
-      .screenshots-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -323,10 +349,11 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div>
-    <div class="hero-badge"><span></span>Application Mobile · Santé &amp; Nutrition</div>
-    <h1>Manger mieux,<br/>avec <span class="brand">Health.ly</span></h1>
-    <p class="hero-sub">
+  <img src="images/mockup/fil_ret-left.png" class="hero-mockup fade-in" alt="Aperçu mobile Health.ly" />
+  <div class="hero-content">
+    <div class="hero-badge fade-in"><span></span>Application Mobile · Santé &amp; Nutrition</div>
+    <h1 class="fade-in fade-in-delay-1">Manger mieux,<br/>avec <span class="brand">Health.ly</span></h1>
+    <p class="hero-sub fade-in fade-in-delay-2">
       Une application mobile qui génère des recettes personnalisées grâce à l'IA Gemini,
       adaptées à vos contraintes nutritionnelles et préférences alimentaires.
     </p>
@@ -334,7 +361,7 @@
       <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
       Découvrir le projet
     </a>
-    <div class="hero-tags">
+    <div class="hero-tags fade-in fade-in-delay-3">
       <span class="hero-tag">Kotlin</span>
       <span class="hero-tag">Spring Boot</span>
       <span class="hero-tag">Gemini 2.5 Flash-Lite</span>
@@ -348,34 +375,34 @@
 <!-- OVERVIEW -->
 <section id="overview">
   <div class="section-label">Vue d'ensemble</div>
-  <h2 class="section-title">Qu'est-ce que Health.ly ?</h2>
+  <h2 class="section-title fade-in">Qu'est-ce que Health.ly ?</h2>
   <p class="section-desc">
     Health.ly est une application mobile complète de santé et nutrition, conçue pour simplifier la création
     et la découverte de recettes saines adaptées à chaque utilisateur. Elle est conçue comme un réseau social aux inspirations d'instagram
   </p>
   <div class="overview-grid">
-    <div class="overview-card">
+    <div class="overview-card fade-in">
       <div class="overview-icon">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/><path d="M18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/></svg>
       </div>
       <h3>Génération IA</h3>
       <p>Les recettes sont générées à la volée par Gemini 2.5 Flash-Lite en réponse structurée JSON, garantissant des données et réponses exploitables et précises.</p>
     </div>
-    <div class="overview-card">
+    <div class="overview-card fade-in fade-in-delay-1">
       <div class="overview-icon">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
       </div>
       <h3>Création manuelle</h3>
       <p>Les utilisateurs peuvent aussi créer leurs propres recettes avec un formulaire complet : titre, description, ingrédients, étapes, tags et difficulté.</p>
     </div>
-    <div class="overview-card">
+    <div class="overview-card fade-in fade-in-delay-2">
       <div class="overview-icon">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
       </div>
       <h3>Suivi nutritionnel</h3>
       <p>Chaque recette affiche les macros (protéines, glucides, lipides, calories) calculées depuis la base CIQUAL officielle.</p>
     </div>
-    <div class="overview-card">
+    <div class="overview-card fade-in fade-in-delay-3">
       <div class="overview-icon">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
       </div>
@@ -388,11 +415,11 @@
 <!-- FEATURES -->
 <section id="features" style="padding-top:0;">
   <div class="section-label">Fonctionnalités</div>
-  <h2 class="section-title">Ce que fait l'application</h2>
+  <h2 class="section-title fade-in">Ce que fait l'application</h2>
   <p class="section-desc">Deux modes de création, un suivi nutritionnel complet et une expérience utilisateur soignée.</p>
 
   <!-- Feature 1 -->
-  <div class="feature-block">
+  <div class="feature-block fade-in">
     <div class="feature-text">
       <h2>Créer une recette manuellement</h2>
       <p>
@@ -416,7 +443,7 @@
   </div>
 
   <!-- Feature 2 -->
-  <div class="feature-block reverse">
+  <div class="feature-block reverse fade-in">
     <div class="feature-text">
       <h2>Générer une recette avec l'IA</h2>
       <p>
@@ -442,7 +469,7 @@
 
 <!-- AI SECTION -->
 <section id="ai" style="padding-top:0;">
-  <div class="ai-section">
+  <div class="ai-section fade-in">
     <div>
       <div class="ai-gemini-badge">
         <div class="gemini-dot"></div>
@@ -461,11 +488,10 @@
       <div class="feature-tags" style="margin-top:8px;">
         <span class="feature-tag">Prompt engineering</span>
         <span class="feature-tag">Structured output</span>
-        <span class="feature-tag">Type-safe</span>
       </div>
     </div>
     <div>
-      <img src="images/Squelette_JSON.png" alt="Squelette JSON du prompt Gemini pour la génération de recettes" style="width:100%;border-radius:16px;border:1px solid rgba(76,175,80,.2);" />
+      <img src="images/Squelette_JSON.png" alt="Squelette JSON du prompt Gemini pour la génération de recettes" style="width:100%;border-radius:8px;border:1px solid rgba(76,175,80,.2);" />
     </div>
   </div>
 </section>
@@ -473,9 +499,9 @@
 <!-- SOCIAL DEMO -->
 <section id="social">
   <div class="section-label">Interactions sociales</div>
-  <h2 class="section-title">Une expérience sociale autour des recettes</h2>
+  <h2 class="section-title fade-in">Une expérience sociale autour des recettes</h2>
   <p class="section-desc">Health.ly s'inspire des codes des réseaux sociaux et les combine à la nutrition</p>
-  <div class="demo-block">
+  <div class="demo-block fade-in">
     <div class="demo-text">
       <h2>Liker, commenter, partager</h2>
       <p>
@@ -516,6 +542,7 @@
       <div class="phone-inner">
         <iframe
           src="https://www.youtube.com/embed/oNGebTVQb8w?autoplay=1&mute=1&loop=1&playlist=oNGebTVQb8w"
+          loading="lazy"
           title="Démonstration des interactions sociales dans Health.ly"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
@@ -532,25 +559,18 @@
   <h2 class="section-title">L'interface en images</h2>
   <p class="section-desc">Un design sombre, moderne et axé user friendly et mode clair disponible.</p>
   <div class="screenshots-grid">
-    <div class="screenshot-card">
+    <div class="screenshot-card fade-in">
       <img src="images/fil_ret.jpg" alt="Fil d'actualité Health.ly — recette Pizza Hawaienne au Thon" />
       <div class="screenshot-label">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
         Fil d'actualité &amp; détail recette
       </div>
     </div>
-    <div class="screenshot-card">
+    <div class="screenshot-card fade-in fade-in-delay-1">
       <img src="images/Création_recettes_par_IA.jpg" alt="Génération de recette par IA avec sélection d'ingrédients" />
       <div class="screenshot-label">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
         Génération IA — sélection d'ingrédients
-      </div>
-    </div>
-    <div class="screenshot-card">
-      <img src="images/Panneau_UI-UX.png" alt="Panneau d'accessibilité Health.ly — thème, taille de texte, unités" />
-      <div class="screenshot-label">
-        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        Panneau d'accessibilité
       </div>
     </div>
   </div>
@@ -559,43 +579,43 @@
 <!-- TECH STACK -->
 <section id="stack" style="padding-top:0;">
   <div class="section-label">Stack technique</div>
-  <h2 class="section-title">Technologies utilisées</h2>
-  <p class="section-desc">Un stack moderne centré sur la performance mobile et l'intégration IA.</p>
+  <h2 class="section-title fade-in">Technologies utilisées</h2>
+  <p class="section-desc">Une stack moderne centré sur la performance mobile et l'intégration IA.</p>
   <div class="tech-grid">
-    <div class="tech-card">
+    <div class="tech-card fade-in">
       <div class="tech-icon">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18h3"/></svg>
       </div>
       <h4>Kotlin</h4>
-      <p>Langage Android natif pour le développement de l'application mobile</p>
+      <p>Langage Android natif pour le développement de l'application mobile, langage moderne/prisé, standard en devenir</p>
     </div>
-    <div class="tech-card">
+    <div class="tech-card fade-in fade-in-delay-1">
       <div class="tech-icon">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.25 14.25h13.5m-13.5 0a3 3 0 01-3-3m3 3a3 3 0 100 6h13.5a3 3 0 100-6m-16.5-3a3 3 0 013-3h13.5a3 3 0 013 3m-19.5 0a4.5 4.5 0 01.9-2.7L5.737 5.1a3.375 3.375 0 012.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 01.9 2.7m0 0a3 3 0 01-3 3m0 3h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008zm-3 6h.008v.008h-.008v-.008zm0-6h.008v.008h-.008v-.008z"/></svg>
       </div>
       <h4>Spring Boot</h4>
       <p>Framework Java/Kotlin pour le backend REST API</p>
     </div>
-    <div class="tech-card">
+    <div class="tech-card fade-in fade-in-delay-2">
       <div class="tech-icon">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/><path d="M18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/></svg>
       </div>
       <h4>Gemini 2.5 Flash-Lite</h4>
-      <p>Modèle IA de Google pour la génération de recettes</p>
+      <p>Modèle IA de Google pour la génération de recettes, léger et rapide, économe et performant pour la tache précise de l'appli</p>
     </div>
-    <div class="tech-card">
+    <div class="tech-card fade-in fade-in-delay-3">
       <div class="tech-icon">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>
       </div>
       <h4>CIQUAL</h4>
       <p>Base officielle de données nutritionnelles française</p>
     </div>
-    <div class="tech-card">
+    <div class="tech-card fade-in fade-in-delay-4">
       <div class="tech-icon">
         <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"/></svg>
       </div>
-      <h4>PostgreSQL</h4>
-      <p>Base de données relationnelle pour le stockage des recettes et utilisateurs</p>
+      <h4>Supabase (PostgreSQL)</h4>
+      <p>Base de données relationnelle en ligne pour le stockage des recettes et utilisateurs</p>
     </div>
     <div class="tech-card">
       <div class="tech-icon">
@@ -614,5 +634,20 @@
   <p style="margin-top:8px;font-size:.78rem;opacity:.5;">Projet portfolio — Lucas</p>
 </footer>
 
+<script>
+(function() {
+  var targets = document.querySelectorAll('.fade-in');
+  if (!targets.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  targets.forEach(function(el) { observer.observe(el); });
+})();
+</script>
 </body>
 </html>
